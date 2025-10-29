@@ -749,7 +749,40 @@ section.container.reverse {
 input[name="email"] {
   display: none;
 }
+    /* ===== Style du bouton ===== */
+    #scrollTopBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 10px;
+      opacity: 0;
+      visibility: hidden;
+      background-color: #b8860b;
+      color: white;
+      border: none;
+      padding: 12px 16px;
+      border-radius: 50%;
+      font-size: 22px;
+      cursor: pointer;
+      z-index: 999;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transform: translateY(20px);
+      transition:
+        opacity 0.4s ease,
+        visibility 0.4s ease,
+        transform 0.4s ease,
+        background-color 0.3s ease;
+    }
 
+    #scrollTopBtn:hover {
+      background-color: #ddb246;
+    }
+
+    /* Quand le bouton devient visible */
+    #scrollTopBtn.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
     @media (max-width: 768px) {
         .titredepackfr, .titredepackar {
         font-size: 32px;
@@ -1310,7 +1343,26 @@ input[name="email"] {
   </div>
 </div>
 
+<script>
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
 
+    // Quand l'utilisateur défile la page
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 150) {
+        scrollTopBtn.classList.add("show");
+      } else {
+        scrollTopBtn.classList.remove("show");
+      }
+    });
+
+    // Au clic, remonter avec un scroll fluide
+    scrollTopBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  </script>
 <script>
         // Initialisation de l'URL du script GAS (Constante PHP remplacée par la valeur)
         const scriptURL = 'https://script.google.com/macros/s/AKfycbw_V41IrpSbLfU6-pcXnNZpLi8m3MRjsXKszKQM77JqxKp31kM46U3tolh2TnDd0Wu5/exec';
@@ -1590,5 +1642,3 @@ function submitForm(formId) {
 
 
 </html>
-
-
